@@ -1,4 +1,3 @@
-message = input("Enter the english message: ")
 
     
 morse_to_english = {
@@ -23,6 +22,26 @@ def get_key(val):
     for key, value in morse_to_english.items():
         if value == val:
             return key
-    return None 
-for x in message:
-    print(get_key(x.upper()),end="|")
+    return None
+def to_morse_code():
+    while True:
+        message = input("Enter the english message: ")
+        for x in message:
+            print(get_key(x.upper()),end="|")
+        replay = input("\nDo you want to continue? (yes/no): ")
+        if replay.lower() != "yes":
+            break
+
+def to_english_code():
+    while True:
+        message = input("Enter the morse code(split by '|' ): ")
+        message = message.split("|")
+        for x in message:
+            print(morse_to_english[x],end="")
+        replay = input("\nDo you want to continue? (yes/no): ")
+        if replay.lower() != "yes":
+            break
+
+        
+to_morse_code()
+to_english_code()

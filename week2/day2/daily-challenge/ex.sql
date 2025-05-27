@@ -37,3 +37,9 @@ WHERE ft.id NOT IN ( SELECT id FROM SecondTab );
 SELECT COUNT(*) AS Q4_Output
 FROM FirstTab AS ft 
 WHERE ft.id NOT IN ( SELECT id FROM SecondTab WHERE id IS NOT NULL );
+
+--Query	Expected Output
+--Q1	0
+--Q2	2
+--Q3	0
+--Q4	2

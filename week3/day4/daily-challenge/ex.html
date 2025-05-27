@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Challenge: Mad Libs</title>
+  <style>
+    #story {
+      font-weight: bold;
+      color: #2c3e50;
+      font-style: italic;
+    }
+    #shuffle-btn {
+      margin-top: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mad Libs</h1>
+
+  <form id="libform">
+    <label for="noun">Noun:</label><input type="text" id="noun" required><br>
+    <label for="adjective">Adjective:</label><input type="text" id="adjective" required><br>
+    <label for="person">Someone's Name:</label><input type="text" id="person" required><br>
+    <label for="verb">Verb:</label><input type="text" id="verb" required><br>
+    <label for="place">A place:</label><input type="text" id="place" required><br>
+    <button id="lib-button">Lib it!</button>
+  </form>
+
+  <p>Generated story: 
+  <span id="story"></span>
+  </p>
+  
+  <button id="shuffle-btn">Shuffle Story</button>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('libform');
+      const storySpan = document.getElementById('story');
+      const shuffleBtn = document.getElementById('shuffle-btn');
+      
+      const storyTemplates = [
+        (noun, adj, person, verb, place) => 
+          `Once upon a time, a ${adj} ${noun} named ${person} decided to ${verb} all the way to ${place}. What an adventure!`,
+        
+        (noun, adj, person, verb, place) => 
+          `${person} found a ${adj} ${noun} while trying to ${verb} in ${place}. It changed their life forever!`,
+        
+        (noun, adj, person, verb, place) => 
+          `In a world where ${noun}s are ${adj}, ${person} must ${verb} to survive in ${place}.`,
+        
+        (noun, adj, person, verb, place) => 
+          `Legend says that if you ${verb} with a ${adj} ${noun} in ${place}, ${person} will appear and grant you a wish.`,
+        
+        (noun, adj, person, verb, place) => 
+          `The ${adj} ${noun} ${verb}ed so hard that ${person} was launched all the way to ${place}!`
+      ];
+      
+      let currentValues = {};
+      
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        currentValues = {
+          noun: document.getElementById('noun').value.trim(),
+          adjective: document.getElementById('adjective').value.trim(),
+          person: document.getElementById('person').value.trim(),
+          verb: document.getElementById('verb').value.trim(),
+          place: document.getElementById('place').value.trim()
+        };
+        
+        for (const key in currentValues) {
+          if (!currentValues[key]) {
+            alert(`Please fill in the ${key} field!`);
+            return;
+          }
+        }
+        
+        generateRandomStory();
+        
+        shuffleBtn.style.display = 'inline-block';
+      });
+      
+      shuffleBtn.addEventListener('click', generateRandomStory);
+      
+      function generateRandomStory() {
+        if (!currentValues.noun) return;
+        
+        const randomTemplate = storyTemplates[Math.floor(Math.random() * storyTemplates.length)];
+        
+        const story = randomTemplate(
+          currentValues.noun,
+          currentValues.adjective,
+          currentValues.person,
+          currentValues.verb,
+          currentValues.place
+        );
+        
+        storySpan.textContent = story;
+      }
+    });
+  </script>
+</body>
+</html>

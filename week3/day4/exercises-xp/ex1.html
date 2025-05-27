@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chocolate Facts</title>
+    <style>
+        .fade-out {
+            animation: fade 1s forwards;
+        }
+        @keyframes fade {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <h1>Some Facts</h1>
+        <h2>The Chocolate</h2>
+        <h3>History of the chocolate</h3>
+        <p>Chocolate is made from tropical Theobroma cacao tree seeds. 
+        Its earliest use dates back to the Olmec civilization in Mesoamerica.</p>
+        <p>After the European discovery of the Americas, chocolate became 
+        very popular in the wider world, and its demand exploded.</p>
+        <p>Chocolate has since become a popular food product that millions enjoy every day, 
+        thanks to its unique, rich, and sweet taste.</p> 
+        <p>But what effect does eating chocolate have on our health?</p>
+    </article>
+    <button id="boldBtn">Make Paragraphs Bold</button>
+
+    <script>
+        const h1 = document.querySelector('h1');
+        console.log(h1);
+
+        const article = document.querySelector('article');
+        const paragraphs = article.querySelectorAll('p');
+        article.removeChild(paragraphs[paragraphs.length - 1]);
+
+        const h2 = document.querySelector('h2');
+        h2.addEventListener('click', () => h2.style.backgroundColor = 'red');
+
+        const h3 = document.querySelector('h3');
+        h3.addEventListener('click', () => h3.style.display = 'none');
+
+        document.getElementById('boldBtn').addEventListener('click', () => {
+            document.querySelectorAll('p').forEach(p => p.style.fontWeight = 'bold');
+        });
+
+        h1.addEventListener('mouseover', () => {
+            h1.style.fontSize = `${Math.random() * 100}px`;
+        });
+
+        paragraphs[1].addEventListener('mouseover', () => {
+            paragraphs[1].classList.add('fade-out');
+        });
+    </script>
+</body>
+</html>

@@ -2,7 +2,6 @@ import sqlite3
 import requests
 import random
 
-# Fetch and store 10 random countries
 conn = sqlite3.connect('countries.db')
 conn.execute('''CREATE TABLE IF NOT EXISTS countries
              (name TEXT, capital TEXT, flag TEXT, subregion TEXT, population INTEGER)''')
@@ -16,6 +15,6 @@ for country in random.sample(countries, 10):
         country.get('subregion', 'None'),
         country['population']
     ))
-s
+
 conn.commit()
 conn.close()
